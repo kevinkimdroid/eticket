@@ -68,7 +68,7 @@ class MpesaService
             'PartyA' => $phone,
             'PartyB' => $this->shortcode,
             'PhoneNumber' => $phone,
-            'CallBackURL' => route('mpesa.callback'),
+            'CallBackURL' => config('services.mpesa.callback_url') ?: route('mpesa.callback'),
             'AccountReference' => substr($reference, 0, 12),
             'TransactionDesc' => 'Ticket payment',
         ];
