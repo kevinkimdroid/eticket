@@ -23,9 +23,16 @@
                 <span class="flex items-center gap-2"><svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>{{ $event->venue }}</span>
                 <span class="flex items-center gap-2"><svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>{{ $event->event_date->format('l, F j, Y') }} · {{ $event->event_date->format('g:i A') }}</span>
             </div>
-            @if($event->payment_mode === 'venue')
-            <span class="inline-block mt-4 text-xs font-semibold text-slate-600 bg-slate-100 px-2.5 py-1 uppercase tracking-wider">Pay at venue</span>
-            @endif
+            @php
+                $paymentBadges = [
+                    'immediate' => ['Pay online only', 'bg-accent/10 text-accent'],
+                    'venue' => ['Pay at gate only', 'bg-amber-100 text-amber-800'],
+                    'both' => ['Pay online or at gate', 'bg-emerald-100 text-emerald-800'],
+                ];
+                $pm = $event->payment_mode ?? 'both';
+                $badge = $paymentBadges[$pm] ?? $paymentBadges['both'];
+            @endphp
+            <span class="inline-block mt-4 text-sm font-semibold px-3 py-1.5 rounded {{ $badge[1] }}">{{ $badge[0] }}</span>
             @if($event->description)
             <p class="mt-6 text-slate-600 leading-relaxed">{{ $event->description }}</p>
             @endif
@@ -34,18 +41,21 @@
                 <div class="space-y-2">
                     @foreach($event->ticketTypes as $tt)
                     @php $left = $tt->quantity - $tt->sold; @endphp
-                    <div class="flex items-center justify-between py-4 px-5 border border-slate-200 {{ $left <= 0 ? 'bg-slate-50' : '' }}">
+                    <div class="flex items-center justify-between py-4 px-5 border border-slate-200 rounded-lg {{ $left <= 0 ? 'bg-slate-50 opacity-75' : '' }}">
                         <div>
                             <span class="font-medium text-slate-900">{{ $tt->name }}</span>
-                            <span class="text-sm text-slate-500 ml-2">{{ $left }} available</span>
+                            <span class="ml-3 inline-flex items-center gap-1 text-sm font-medium {{ $left <= 5 ? 'text-amber-600' : 'text-slate-500' }}">
+                                <span class="font-semibold">{{ $left }}</span> {{ $left === 1 ? 'ticket' : 'tickets' }} left
+                            </span>
                         </div>
                         <span class="font-semibold text-slate-900">{{ config('app.currency_symbol') }} {{ number_format($tt->price) }}</span>
                     </div>
                     @endforeach
                 </div>
-                @if($event->ticketTypes->sum(fn($t) => $t->quantity - $t->sold) > 0)
-                <a href="{{ route('bookings.create', $event) }}" class="mt-6 inline-flex items-center justify-center w-full sm:w-auto px-10 py-4 bg-accent text-white text-sm font-semibold hover:bg-accent-600 active:bg-accent-700 transition min-h-[52px] rounded-xl sm:rounded-none" style="-webkit-tap-highlight-color: transparent;">
-                    Get Tickets
+                @php $totalLeft = $event->ticketTypes->sum(fn($t) => $t->quantity - $t->sold); @endphp
+                @if($totalLeft > 0)
+                <a href="{{ route('bookings.create', $event) }}" class="mt-6 inline-flex items-center justify-center w-full sm:w-auto px-10 py-4 bg-accent text-white text-base font-semibold hover:bg-accent-600 active:bg-accent-700 transition min-h-[52px] rounded-xl sm:rounded-none" style="-webkit-tap-highlight-color: transparent;">
+                    Get Tickets — {{ $totalLeft }} {{ $totalLeft === 1 ? 'ticket' : 'tickets' }} available
                 </a>
                 @else
                 <p class="mt-6 text-sm text-slate-500 font-medium">Sold out</p>

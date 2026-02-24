@@ -20,6 +20,11 @@
 </head>
 <body class="min-h-screen min-h-[100dvh] bg-slate-50 flex items-center justify-center p-4 font-sans antialiased" style="padding-top: max(1rem, env(safe-area-inset-top)); padding-bottom: max(1rem, env(safe-area-inset-bottom)); padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right));">
     <div class="w-full max-w-md">
+        @if(session('success'))
+        <div class="mb-4 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-lg text-sm font-medium">
+            {{ session('success') }}
+        </div>
+        @endif
         <div class="bg-white border border-slate-200 overflow-hidden">
             <div class="p-6 border-b border-slate-200 bg-slate-50">
                 <div class="flex items-center gap-2 mb-2">
@@ -36,8 +41,8 @@
                         <p class="text-2xl font-mono font-semibold tracking-widest text-slate-900">{{ $booking->booking_code }}</p>
                         <p class="text-slate-700 mt-2 font-medium">{{ $booking->customer_name }}</p>
                         <p class="text-slate-500 text-sm">{{ $booking->ticketType->name }} × {{ $booking->quantity }}</p>
-                        <span class="inline-block mt-3 px-2.5 py-1 text-xs font-semibold {{ in_array($booking->status, ['paid', 'pay_at_venue']) ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800' }}">
-                            {{ $booking->status === 'pay_at_venue' ? 'Pay at entrance' : ucfirst($booking->status) }}
+                        <span class="inline-block mt-3 px-2.5 py-1 text-sm font-semibold {{ in_array($booking->status, ['paid', 'pay_at_venue']) ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800' }}">
+                            {{ $booking->status === 'pay_at_venue' ? 'Pay at gate on event day' : ($booking->status === 'paid' ? 'Paid' : ucfirst($booking->status)) }}
                         </span>
                     </div>
                     <div class="flex-shrink-0 p-3 border border-slate-200">

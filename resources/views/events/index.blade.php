@@ -9,19 +9,19 @@
 @section('content')
 {{-- Hero --}}
 <div class="mb-6 sm:mb-12">
-    <p class="text-xs font-semibold text-accent uppercase tracking-[0.2em] mb-2">Discover</p>
-    <h1 class="font-display text-3xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight">Upcoming Events</h1>
-    <p class="mt-3 sm:mt-4 text-base sm:text-lg text-slate-600 max-w-2xl">Find concerts, conferences, and festivals. Secure checkout. Instant e-tickets.</p>
+    <p class="text-sm font-semibold text-accent uppercase tracking-[0.2em] mb-2">Discover</p>
+    <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight">Upcoming Events</h1>
+    <p class="mt-3 sm:mt-4 text-lg sm:text-xl text-slate-600 max-w-2xl leading-relaxed">Find concerts, conferences, and festivals. Secure checkout. Instant e-tickets.</p>
 </div>
 
 {{-- Search & Filter (TikoHUB-style) --}}
 <form method="GET" action="{{ route('events.index') }}" class="mb-8 space-y-4">
     <div class="flex flex-col sm:flex-row gap-3">
         <div class="flex-1">
-            <input type="text" name="q" value="{{ request('q') }}" placeholder="Search events..." class="w-full border border-slate-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-accent focus:border-accent rounded-lg sm:rounded-none">
+            <input type="text" name="q" value="{{ request('q') }}" placeholder="Search events..." class="w-full border border-slate-300 px-4 py-3 text-base focus:ring-2 focus:ring-accent focus:border-accent rounded-lg sm:rounded-none">
         </div>
         <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
-            <select name="category" class="border border-slate-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-accent focus:border-accent rounded-lg sm:rounded-none bg-white">
+            <select name="category" class="border border-slate-300 px-4 py-3 text-base focus:ring-2 focus:ring-accent focus:border-accent rounded-lg sm:rounded-none bg-white">
                 <option value="">All types</option>
                 <option value="concert" {{ request('category') === 'concert' ? 'selected' : '' }}>Concert</option>
                 <option value="conference" {{ request('category') === 'conference' ? 'selected' : '' }}>Conference</option>
@@ -31,30 +31,30 @@
                 <option value="comedy" {{ request('category') === 'comedy' ? 'selected' : '' }}>Comedy</option>
                 <option value="other" {{ request('category') === 'other' ? 'selected' : '' }}>Other</option>
             </select>
-            <select name="sort" class="border border-slate-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-accent focus:border-accent rounded-lg sm:rounded-none bg-white">
+            <select name="sort" class="border border-slate-300 px-4 py-3 text-base focus:ring-2 focus:ring-accent focus:border-accent rounded-lg sm:rounded-none bg-white">
                 <option value="upcoming" {{ request('sort') === 'upcoming' ? 'selected' : '' }}>Upcoming</option>
                 <option value="weekend" {{ request('sort') === 'weekend' ? 'selected' : '' }}>This Weekend</option>
                 <option value="week" {{ request('sort') === 'week' ? 'selected' : '' }}>This Week</option>
                 <option value="month" {{ request('sort') === 'month' ? 'selected' : '' }}>This Month</option>
             </select>
-            <button type="submit" class="px-4 py-2.5 bg-navy-900 text-white text-sm font-medium hover:bg-navy-800 transition rounded-lg sm:rounded-none">Filter</button>
+            <button type="submit" class="px-4 py-3 bg-navy-900 text-white text-base font-medium hover:bg-navy-800 transition rounded-lg sm:rounded-none">Filter</button>
         </div>
     </div>
 </form>
 
 {{-- Featured Events --}}
 @if(isset($featuredEvents) && $featuredEvents->count() > 0)
-<h2 class="text-lg font-semibold text-slate-900 mb-4">Featured Events</h2>
+<h2 class="text-xl font-semibold text-slate-900 mb-4">Featured Events</h2>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12 -mx-4 sm:mx-0 px-4 sm:px-0">
     @foreach($featuredEvents as $event)
         @include('events._card', ['event' => $event])
     @endforeach
 </div>
-<h2 class="text-lg font-semibold text-slate-900 mb-4 mt-8">All Events</h2>
+<h2 class="text-xl font-semibold text-slate-900 mb-4 mt-8">All Events</h2>
 @endif
 
 @if($events->count() > 0)
-<p class="text-sm font-medium text-slate-500 mb-6 sm:mb-8">{{ $events->count() }} {{ Str::plural('event', $events->count()) }} available</p>
+<p class="text-base font-medium text-slate-500 mb-6 sm:mb-8">{{ $events->count() }} {{ Str::plural('event', $events->count()) }} available</p>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 -mx-4 sm:mx-0 px-4 sm:px-0">
     @foreach($events as $event)
         @include('events._card', ['event' => $event])
@@ -63,8 +63,8 @@
 @else
 <div class="bg-white border border-slate-200 p-16 sm:p-20 text-center rounded-2xl sm:rounded-none">
     <svg class="w-12 h-12 text-slate-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-    <h3 class="font-display text-2xl text-slate-900">No events match your search</h3>
-    <p class="mt-2 text-slate-500">Try adjusting your filters or check back later.</p>
+    <h3 class="font-display text-2xl sm:text-3xl text-slate-900">No events match your search</h3>
+    <p class="mt-2 text-base text-slate-500">Try adjusting your filters or check back later.</p>
     <a href="{{ route('events.index') }}" class="inline-block mt-6 px-6 py-3 bg-navy-900 text-white text-sm font-semibold hover:bg-navy-800 transition">View all events</a>
 </div>
 @endif
@@ -78,7 +78,7 @@
             </div>
             <div>
                 <p class="font-semibold text-slate-900">Secure checkout</p>
-                <p class="text-sm text-slate-500">M-Pesa & Stripe</p>
+                <p class="text-base text-slate-500">M-Pesa & Stripe</p>
             </div>
         </div>
         <div class="flex items-center gap-4">
@@ -87,7 +87,7 @@
             </div>
             <div>
                 <p class="font-semibold text-slate-900">Instant delivery</p>
-                <p class="text-sm text-slate-500">E-tickets with QR codes</p>
+                <p class="text-base text-slate-500">E-tickets with QR codes</p>
             </div>
         </div>
         <div class="flex items-center gap-4">
@@ -96,13 +96,13 @@
             </div>
             <div>
                 <p class="font-semibold text-slate-900">24/7 support</p>
-                <p class="text-sm text-slate-500"><a href="{{ route('contact') }}" class="text-accent hover:underline">Contact us</a></p>
+                <p class="text-base text-slate-500"><a href="{{ route('contact') }}" class="text-accent hover:underline">Contact us</a></p>
             </div>
         </div>
     </div>
 </div>
 
 <div class="mt-8 sm:mt-12 text-center hidden sm:block">
-    <a href="{{ route('login') }}" class="text-sm font-medium text-accent hover:text-accent-600 transition">Organizer login →</a>
+    <a href="{{ route('login') }}" class="text-base font-medium text-accent hover:text-accent-600 transition">Organizer login →</a>
 </div>
 @endsection

@@ -38,9 +38,9 @@
     <div class="mb-4">
         <label class="block font-medium mb-1">Payment Mode</label>
         <select name="payment_mode" class="w-full border rounded px-3 py-2">
-            <option value="both" {{ $event->payment_mode === 'both' ? 'selected' : '' }}>Both – Online or pay at venue</option>
-            <option value="immediate" {{ $event->payment_mode === 'immediate' ? 'selected' : '' }}>Immediate – Online only</option>
-            <option value="venue" {{ $event->payment_mode === 'venue' ? 'selected' : '' }}>Pay at venue only</option>
+            <option value="both" {{ $event->payment_mode === 'both' ? 'selected' : '' }}>Both – Pay online or at gate</option>
+            <option value="immediate" {{ $event->payment_mode === 'immediate' ? 'selected' : '' }}>Online only – M-Pesa or card</option>
+            <option value="venue" {{ $event->payment_mode === 'venue' ? 'selected' : '' }}>Pay at gate only – Reserve now, pay on event day</option>
         </select>
     </div>
     <div class="mb-4">

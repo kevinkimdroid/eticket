@@ -49,7 +49,7 @@ class BookingController extends Controller
 
         if ($event->payment_mode === Event::PAYMENT_VENUE) {
             return redirect()->route('tickets.show', $booking->booking_code)
-                ->with('success', 'Ticket reserved! Pay at the venue on event day.');
+                ->with('success', 'Tickets reserved! Pay at the gate on event day.');
         }
 
         return redirect()->route('bookings.payment', $booking);

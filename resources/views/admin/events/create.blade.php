@@ -36,11 +36,11 @@
     <div class="mb-4">
         <label class="block font-medium mb-1">Payment Mode</label>
         <select name="payment_mode" class="w-full border rounded px-3 py-2">
-            <option value="both">Both – Online (M-Pesa/Card) or pay at venue</option>
-            <option value="immediate">Immediate – Online payment only</option>
-            <option value="venue">Pay at venue – No online payment required</option>
+            <option value="both">Both – Pay online or at gate</option>
+            <option value="immediate">Online only – M-Pesa or card</option>
+            <option value="venue">Pay at gate only – Reserve now, pay on event day</option>
         </select>
-        <p class="text-sm text-slate-500 mt-1">Control how attendees pay for tickets</p>
+        <p class="text-sm text-slate-500 mt-1">Attendees can pay online (M-Pesa/card) or at the gate on event day</p>
     </div>
     <div class="mb-4">
         <label class="flex items-center gap-2">

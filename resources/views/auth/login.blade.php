@@ -35,7 +35,7 @@
         </a>
         <div>
             <h2 class="font-display text-3xl xl:text-4xl text-white leading-tight">Organizer dashboard</h2>
-            <p class="mt-4 text-slate-400 max-w-sm">Manage events, track bookings, and scan tickets — all in one place.</p>
+            <p class="mt-4 text-lg text-slate-400 max-w-sm leading-relaxed">Manage events, track bookings, and scan tickets — all in one place.</p>
         </div>
         <p class="text-xs text-slate-500">Event ticketing for Kenya</p>
     </div>
@@ -52,7 +52,7 @@
                 <div class="h-1 bg-gradient-to-r from-accent to-accent-600"></div>
                 <div class="p-8 sm:p-10">
                     <h1 class="font-display text-2xl sm:text-3xl text-slate-900">Sign in</h1>
-                    <p class="text-slate-500 mt-1">Access your organizer dashboard</p>
+                    <p class="text-base text-slate-500 mt-1">Access your organizer dashboard</p>
 
                     @if($errors->any())
                     <div class="mt-6 p-4 bg-red-50 border border-red-100 rounded-lg flex items-start gap-3">
@@ -67,24 +67,24 @@
                         @csrf
                         <div>
                             <label for="email" class="block text-sm font-medium text-slate-700 mb-1.5">Email</label>
-                            <input type="email" id="email" name="email" required autocomplete="email" value="{{ old('email') }}" class="w-full border border-slate-300 px-4 py-3 rounded-lg text-sm placeholder-slate-400 focus:ring-2 focus:ring-accent focus:border-accent transition" placeholder="you@example.com">
+                            <input type="email" id="email" name="email" required autocomplete="email" value="{{ old('email') }}" class="w-full border border-slate-300 px-4 py-3 rounded-lg text-base placeholder-slate-400 focus:ring-2 focus:ring-accent focus:border-accent transition" placeholder="you@example.com">
                         </div>
                         <div>
                             <label for="password" class="block text-sm font-medium text-slate-700 mb-1.5">Password</label>
-                            <input type="password" id="password" name="password" required autocomplete="current-password" class="w-full border border-slate-300 px-4 py-3 rounded-lg text-sm placeholder-slate-400 focus:ring-2 focus:ring-accent focus:border-accent transition" placeholder="••••••••">
+                            <input type="password" id="password" name="password" required autocomplete="current-password" class="w-full border border-slate-300 px-4 py-3 rounded-lg text-base placeholder-slate-400 focus:ring-2 focus:ring-accent focus:border-accent transition" placeholder="••••••••">
                         </div>
                         <label class="flex items-center gap-2.5 cursor-pointer">
                             <input type="checkbox" name="remember" class="w-4 h-4 rounded border-slate-300 text-accent focus:ring-accent">
-                            <span class="text-sm text-slate-600">Remember me</span>
+                            <span class="text-base text-slate-600">Remember me</span>
                         </label>
-                        <button type="submit" class="w-full py-3.5 bg-navy-900 text-white text-sm font-semibold rounded-lg hover:bg-navy-800 transition min-h-[52px] flex items-center justify-center">
+                        <button type="submit" class="w-full py-3.5 bg-navy-900 text-white text-base font-semibold rounded-lg hover:bg-navy-800 transition min-h-[52px] flex items-center justify-center">
                             Sign in
                         </button>
                     </form>
                 </div>
             </div>
 
-            <div class="mt-8 flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm">
+            <div class="mt-8 flex flex-wrap justify-center gap-x-4 gap-y-2 text-base">
                 <a href="{{ route('events.index') }}" class="text-slate-500 hover:text-accent transition">← Back to events</a>
                 <span class="text-slate-300 hidden sm:inline">·</span>
                 <a href="{{ route('shop.index') }}" class="text-slate-500 hover:text-accent transition">Shop</a>
